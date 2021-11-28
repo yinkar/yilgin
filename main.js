@@ -1,7 +1,9 @@
+const cellSize = 16;
+
 const world = {
-  cellSize: 16,
-  width: Math.floor(screen.width/16),
-  height: Math.floor((screen.availHeight - 4*16)/16)
+  cellSize: cellSize,
+  width: Math.floor((screen.width - 2*cellSize)/cellSize),
+  height: Math.floor((screen.availHeight - 4*cellSize)/cellSize)
 };
 
 class Snake {
