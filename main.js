@@ -1,5 +1,7 @@
 const cellSize = 16;
 
+let lastMoveTime = 0;
+
 const world = {
   cellSize: cellSize,
   width: Math.floor((screen.width - 2*cellSize)/cellSize),
@@ -165,6 +167,7 @@ function draw() {
 }
 
 function keyPressed() {
+  if ((+new Date) - lastMoveTime < 100) return;
   if (['w', 'arrowup'].includes(str(key).toLowerCase()) && snake.speed.y != 1) {
     snake.speed = {
       x: 0,
@@ -189,9 +192,11 @@ function keyPressed() {
       y: 0
     }
   }
+  lastMoveTime = +new Date();
 }
 
 function touchMoved(e) {
+  if ((+new Date) - lastMoveTime < 100) return;
   if (Math.abs(mouseX - pmouseX) > Math.abs(mouseY - pmouseY) && Math.sign(mouseX - pmouseX) !== -snake.speed.x) {
     snake.speed = {
       x: Math.sign(mouseX - pmouseX),
@@ -204,4 +209,5 @@ function touchMoved(e) {
       y: Math.sign(mouseY - pmouseY)
     }
   }
+  lastMoveTime = +new Date();
 }
